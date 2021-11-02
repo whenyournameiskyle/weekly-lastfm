@@ -46,8 +46,13 @@ async fn get_top_lastfm_tweet() -> Result<String, io::Error> {
     }
 
     let mut tweet: String = "My most played artists last week:".to_owned();
+    let mut artist_length = 5;
 
-    for item in &artist[0..5] {
+    if artist.len() < 5 {
+        artist_length = artist.len();
+    }
+
+    for item in &artist[0..artist_length] {
         tweet = tweet + " " + &item.name + " (" + &item.playcount + ")";
     }
 
