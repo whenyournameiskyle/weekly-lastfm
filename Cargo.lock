@@ -1070,15 +1070,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "logs"
-version = "0.5.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0300a352762d77cf7321824c24a98de6e1118cd5b03cb8becfec2b4a7b53c46b"
-dependencies = [
- "time 0.1.44",
-]
-
-[[package]]
 name = "matches"
 version = "0.1.9"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2166,11 +2157,10 @@ dependencies = [
 
 [[package]]
 name = "weekly-lastfm"
-version = "0.1.0"
+version = "0.2.0"
 dependencies = [
  "async-std",
  "egg-mode",
- "logs",
  "serde",
  "serde_json",
  "surf",

@@ -1,5 +1,4 @@
 use egg_mode::tweet::DraftTweet;
-use logs::{error, info};
 use serde::Deserialize;
 use serde_json::from_str;
 use std::{env, io};
@@ -23,11 +22,9 @@ async fn main() -> Result<(), io::Error> {
     let tweet: String = get_top_lastfm_tweet().await.expect("to have a value");
 
     if tweet.is_empty() {
-        error!("No artists returned");
         return Ok(());
     }
 
-    info!("{}", tweet);
     send_tweet(tweet).await;
 
     Ok(())
@@ -76,11 +73,9 @@ async fn send_tweet(value: String) {
         access: access_token,
     };
 
-    if let Err(err) = egg_mode::auth::verify_tokens(&token).await {
-        error!("We've hit an error using your old tokens: {:?}", err);
+    if let Err(_err) = egg_mode::auth::verify_tokens(&token).await {
         return;
     } else {
-        info!("Authenticated successfully.");
     }
 
     let tweet = DraftTweet::new(value);
@@ -88,6 +83,4 @@ async fn send_tweet(value: String) {
         .send(&token)
         .await
         .expect("Something went wrong with sending the tweet");
-
-    info!("Tweet sent!");
 }
